@@ -1,0 +1,72 @@
+#include <stdio.h>
+#define ROWS 12 //how many rows we have
+#define COLS 3 //how many cols we have
+
+void Print2DArray(int array[][COLS], int rows); //print array prototype
+double PrintRowAverage(int array[][COLS], int whichrow);//print row average prototype
+double PrintColAverage(int array[][COLS], int whichcol);//print col average prototype
+
+int main(void)
+{
+    //the matrix
+    int array[ROWS][COLS] =
+    {{72,68,62},{95,88,95},{93,97,86},
+    {98,77,98},{99,92,90},{47,32,27},
+    {97,99,85},{85,95,91},{96,91,99},
+    {94,90,85},{98,98,90},{76,82,98}};
+
+
+    Print2DArray(array, ROWS); //calls the func that prints the arrays
+    printf("\n");
+
+    //loop that goes through the rows and prints the average
+    for(int i = 0; i < ROWS; i++){
+        printf("Average for row %d = %lf\n",
+        i, PrintRowAverage(array, i));
+    }
+
+    printf("\n");
+    
+    //loop that goes through the cols and prints the average
+    for(int i = 0; i < COLS; i++){
+        printf("Average for col %d = %lf\n",
+        i, PrintColAverage(array, i));
+    }
+
+    printf("\n");
+    return 0;
+}
+//func that just prints the arrays
+void Print2DArray(int array[][COLS], int rows)
+{
+    int i, j; //uses i and j because we are dealing with a matrix
+    for(i = 0; i < rows; i++){
+        printf("Row %d: ", i); //prints the row number
+        for(j = 0; j < COLS; j++){
+            printf("%d ",array[i][j]); //actually prints the matrix
+        }
+        printf("\n");
+    }
+}
+//func that calculates the row average
+double PrintRowAverage(int array[][COLS], int whichrow)
+{
+    int i;
+    double total = 0; 
+    for(i = 0; i < COLS; i++){ // we use COLS because we are basically dividing by 3, or the the columns
+        total += array[whichrow][i]; //whichrow is in the row spot because that is what we care about
+    }
+    double average = total / COLS; //calculates the average by dividing by 3
+    return average;
+}
+//func that calculates the col average
+double PrintColAverage(int array[][COLS], int whichcol)
+{
+    int i;
+    double total = 0;
+    for(i = 0; i < ROWS; i++){ //we use ROWS because we are basically dividing by 12, or the rows
+        total += array[i][whichcol]; //whichcol is in the col spot because that is what we care about
+    }
+    double average = total / ROWS; //calculates the average by dividing by 12
+    return average;
+}
